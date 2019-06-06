@@ -1,0 +1,19 @@
+---
+- name: Add repository
+  yum_repository:
+    name: MariaDB
+    description: MariaDB repo
+    baseurl: http://yum.mariadb.org/10.3/rhel7-amd64
+    gpgkey: https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+    gpgcheck: true
+
+- name: Install MariaDB server
+  yum:
+    name: MariaDB-server
+    state: present
+
+- name: Start MariaDB service
+  systemd:
+    name: mariadb
+    state: started
+    enabled: yes
